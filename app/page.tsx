@@ -1,3 +1,9 @@
+import { Type } from "@/components";
+
 export default function Page() {
-  return <>Hello World</>;
+  return (
+    <>
+      <Type pokemonType="fire" />
+    </>
+  );
 }

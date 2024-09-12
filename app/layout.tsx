@@ -1,6 +1,9 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter as InterFF } from "next/font/google";
-import "./globals.css";
+
+import { DarkTheme } from "@/components";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${Inter.className}`}>{children}</body>
+      <body
+        className={`antialiased dark:bg-blue-500 bg-green-400 ${Inter.className}`}
+      >
+        <DarkTheme />
+        {children}
+      </body>
     </html>
   );
 }
