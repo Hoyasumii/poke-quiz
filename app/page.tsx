@@ -1,6 +1,6 @@
-import { Type } from "@/components";
+import { PokemonCard } from "@/components";
 import { getPokemon } from "@/services";
-import { shuffleNumbers, types } from "@/utils";
+import { preloadImage, shuffleNumbers, shuffleTypes } from "@/utils";
 
 export default async function Page() {
   const pokemonNumbers = shuffleNumbers(3);
@@ -9,18 +9,26 @@ export default async function Page() {
     pokemonNumbers.map((pokemonNumber) => getPokemon(pokemonNumber))
   );
 
+  const preloadedPokemonSprites = await Promise.all(
+    selectedPokemon.map((pokemon) => preloadImage(pokemon.sprite))
+  );
+
+  const displayablePokemonTypes = selectedPokemon.map((pokemon) =>
+    shuffleTypes(pokemon.types[0], pokemon.types[1] || pokemon.types[0])
+  );
+
   return (
-    <>
-      {/* {selectedPokemon.map((pokemon, index) => (
-        <div key={`pokemon-card-${index}`}>
-          <img src={pokemon.sprite} alt="" loading="lazy" />{" "}
-          {pokemon.types.map((pokemonType, index) => (
-            <Type pokemonType={pokemonType} key={`type-${index}`} />
-          ))}
-        </div>
-      ))} */}
-    </>
+    <main className="flex flex-col gap-4 items-center py-10 w-40 md:w-72 h-full">
+      {selectedPokemon.map((pokemon, index) => (
+        <PokemonCard
+          name={pokemon.name}
+          sprite={preloadedPokemonSprites[index]}
+          number={pokemon.number}
+          types={displayablePokemonTypes[index][0]}
+          correctAnswer={displayablePokemonTypes[index][1]}
+          key={`pokemon-card-${index}`}
+        />
+      ))}
+    </main>
   );
 }
-
-

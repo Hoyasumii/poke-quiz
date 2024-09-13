@@ -1,2 +1,2 @@
 export { Type } from "./Type";
-export { DarkTheme } from "./DarkTheme";
+export { PokemonCard } from "./PokemonCard";

@@ -13,5 +13,3 @@ export async function getPokemon(id: number): Promise<Pokemon> {
     ) as Pokemon["types"],
   };
 }
-
-console.log(await getPokemon(2));
