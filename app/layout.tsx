@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased dark:bg-blue-500 bg-green-400 ${Inter.className}`}
+        className={`antialiased h-svh w-svw flex flex-col items-center justify-center dark:bg-gray-950 bg-slate-50 ${Inter.className}`}
       >
         <DarkTheme />
         {children}

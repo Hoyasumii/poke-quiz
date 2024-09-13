@@ -1,3 +1,5 @@
+import { PokemonType } from "@/types";
+
 export default {
   normal: "bg-[#a0a19f]",
   fighting: "bg-[#fe7f00]",
@@ -17,4 +19,4 @@ export default {
   dragon: "bg-[#5060e1]",
   dark: "bg-[#624d4f]",
   fairy: "bg-[#ef71ef]",
-} as const;
+} as const as Record<PokemonType, string>;
