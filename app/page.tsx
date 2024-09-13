@@ -1,4 +1,4 @@
-import { PokemonCard } from "@/components";
+import { PokemonCard, StepButton, StepManager } from "@/components";
 import { getPokemon } from "@/services";
 import { preloadImage, shuffleNumbers, shuffleTypes } from "@/utils";
 
@@ -19,16 +19,26 @@ export default async function Page() {
 
   return (
     <main className="flex flex-col gap-4 items-center py-10 w-40 md:w-72 h-full">
-      {selectedPokemon.map((pokemon, index) => (
-        <PokemonCard
-          name={pokemon.name}
-          sprite={preloadedPokemonSprites[index]}
-          number={pokemon.number}
-          types={displayablePokemonTypes[index][0]}
-          correctAnswer={displayablePokemonTypes[index][1]}
-          key={`pokemon-card-${index}`}
-        />
-      ))}
+      <StepManager.Root>
+        <StepManager.Start>
+          <StepButton />
+        </StepManager.Start>
+        <StepManager.Content>
+          {selectedPokemon.map((pokemon, index) => (
+            <PokemonCard
+              name={pokemon.name}
+              sprite={preloadedPokemonSprites[index]}
+              number={pokemon.number}
+              types={displayablePokemonTypes[index][0]}
+              correctAnswer={displayablePokemonTypes[index][1]}
+              key={`pokemon-card-${index}`}
+            />
+          ))}
+        </StepManager.Content>
+        <StepManager.End>
+          <p>Fim</p>
+        </StepManager.End>
+      </StepManager.Root>
     </main>
   );
 }

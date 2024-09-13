@@ -3,6 +3,7 @@
 import { PokemonType } from "@/types";
 import Image from "next/image";
 import { Type } from "./Type";
+import { useStep } from "@/storage";
 
 type Props = {
   name: string;
@@ -19,6 +20,8 @@ export function PokemonCard({
   sprite,
   types,
 }: Props) {
+  const { step, setStep } = useStep();
+
   return (
     <div className="flex flex-col gap-2 items-center w-fit bg-white shadow-sm shadow-slate-100 rounded-2xl p-4">
       <Image src={sprite} alt="" width={512} height={512} />
@@ -32,7 +35,8 @@ export function PokemonCard({
         {types.map((pokemonType, index) => (
           <Type
             onClick={() => {
-              alert(pokemonType === correctAnswer);
+              setStep(step + 1);
+              // alert(pokemonType === correctAnswer);
             }}
             pokemonType={pokemonType}
             key={`pokemon-type-${index}`}
