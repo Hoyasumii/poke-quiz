@@ -36,7 +36,6 @@ export function PokemonCard({
           <Type
             onClick={() => {
               setStep(step + 1);
-              // alert(pokemonType === correctAnswer);
             }}
             pokemonType={pokemonType}
             key={`pokemon-type-${index}`}

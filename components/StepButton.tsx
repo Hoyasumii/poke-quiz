@@ -14,9 +14,14 @@ export function StepButton({}: Props) {
   return (
     <button
       onClick={() => {
+        if (step > 0) {
+          window.location.reload();
+          return;
+        }
+
         setStep(step + 1);
       }}
-      className="bg-white px-4 py-3 text-slate-300 shadow"
+      className="bg-white px-4 py-3 text-slate-900 shadow rounded-lg flex items-center gap-4 duration-300 transition-all hover:scale-105 hover:bg-slate-50 active:scale-100 active:bg-slate-100"
     >
       {step < 0 ? (
         <>

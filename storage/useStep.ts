@@ -6,7 +6,7 @@ type Step = {
 };
 
 export default create<Step>()((set) => ({
-  step: -1,
+  step: 0,
   setStep(value) {
     set(() => ({ step: value }));
   },

@@ -11,20 +11,23 @@ export function Root({ children }: Props) {
   const { step } = useStep();
   const managedNode = children as ReactElement[];
 
-  if ((children as ReactElement[]).length !== 3) throw new Error();
+  const content = managedNode.find(
+    (nodeChildren) => nodeChildren.props.type === "content"
+  );
+  
+  const end = managedNode.find(
+    (nodeChildren) => nodeChildren.props.type === "end"
+  );
 
-  const start = managedNode[0];
-  const end = managedNode[2];
+  if (!content || !end) throw new Error();
 
   return (
     <>
-      {step < 0 && start}
+      {step < (content.props.children as ReactElement[]).length &&
+        content.props.children[step]}
 
-      {step >= 0 &&
-        step < managedNode.length &&
-        managedNode[1].props.children[step]}
-
-      {step > managedNode.length - 1 && end}
+      {step > (content.props.children as ReactElement[]).length - 1 &&
+        end}
     </>
   );
 }
