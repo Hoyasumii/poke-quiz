@@ -1,6 +1,5 @@
 import { PokemonCard, StepButton, StepManager } from "@/components";
-import { getPokemon } from "@/services";
-import { preloadImage, shuffleNumbers, shuffleTypes } from "@/utils";
+import { loadPokemonData } from "@/server";
 
 export default async function Page({
   params: { amount },
@@ -11,34 +10,19 @@ export default async function Page({
 
   if (isNaN(pokemonAmount)) return new Error();
 
-  const pokemonNumbers = shuffleNumbers(
-    pokemonAmount,
-    parseInt(process.env.POKEMON_COUNTER || "0")
-  );
-
-  const selectedPokemon = await Promise.all(
-    pokemonNumbers.map((pokemonNumber) => getPokemon(pokemonNumber))
-  );
-
-  const preloadedPokemonSprites = await Promise.all(
-    selectedPokemon.map((pokemon) => preloadImage(pokemon.sprite))
-  );
-
-  const displayablePokemonTypes = selectedPokemon.map((pokemon) =>
-    shuffleTypes(pokemon.types[0], pokemon.types[1] || pokemon.types[0])
-  );
+  const pokemonData = await loadPokemonData(pokemonAmount);
 
   return (
     <main className="flex flex-col gap-4 items-center py-10 w-40 md:w-72 h-full">
       <StepManager.Root>
         <StepManager.Content>
-          {selectedPokemon.map((pokemon, index) => (
+          {pokemonData.map((pokemon, index) => (
             <PokemonCard
-              name={pokemon.name.split("-").join()}
-              sprite={preloadedPokemonSprites[index]}
+              name={pokemon.name}
+              sprite={pokemon.sprite}
               number={pokemon.number}
-              types={displayablePokemonTypes[index][0]}
-              correctAnswer={displayablePokemonTypes[index][1]}
+              types={pokemon.types}
+              correctAnswer={pokemon.correctAnswer}
               key={`pokemon-card-${index}`}
             />
           ))}

@@ -4,6 +4,8 @@ export function shuffleNumbers(
 ): Array<number> {
   const shuffledNumbers: Array<number> = [];
 
+  amount = amount > max ? max : amount;
+
   for (let index: number = 0; index < amount; index++) {
     const shuffledNumber = Math.floor(Math.random() * max) + 1;
 

@@ -23,7 +23,7 @@ export function PokemonCard({
   const { step, setStep } = useStep();
 
   return (
-    <div className="flex flex-col gap-2 items-center w-fit bg-white shadow-sm shadow-slate-100 rounded-2xl p-4">
+    <div className="flex flex-col gap-2 items-center w-fit bg-white shadow-sm shadow-slate-200 rounded-2xl p-4">
       <Image src={sprite} alt="" width={512} height={512} />
       <div className="w-full flex justify-center items-start gap-2 pb-2 border-b border-b-slate-100">
         <strong className="font-bold text-slate-700 text-xl md:text-2xl capitalize">

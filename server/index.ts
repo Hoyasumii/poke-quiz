@@ -1,0 +1,1 @@
+export { loadPokemonData } from "./loadPokemonData";
