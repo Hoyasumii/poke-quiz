@@ -24,19 +24,19 @@ export async function loadPokemonData(
       )
     : shuffleNumbers(pokemonAmount, 151);
 
-  const selectedPokemon = await Promise.all(
+  const retrievedPokemon = await Promise.all(
     pokemonNumbers.map((pokemonNumber) => getPokemon(pokemonNumber))
   );
 
   const preloadedPokemonSprites = await Promise.all(
-    selectedPokemon.map((pokemon) => preloadImage(pokemon.sprite))
+    retrievedPokemon.map((pokemon) => preloadImage(pokemon.sprite))
   );
 
-  const displayablePokemonTypes = selectedPokemon.map((pokemon) =>
+  const displayablePokemonTypes = retrievedPokemon.map((pokemon) =>
     shuffleTypes(pokemon.types[0], pokemon.types[1] || pokemon.types[0])
   );
 
-  return selectedPokemon.map((pokemon, index) => ({
+  return retrievedPokemon.map((pokemon, index) => ({
     name: pokemon.name.split("-").join(" "),
     sprite: preloadedPokemonSprites[index],
     number: pokemon.number,
