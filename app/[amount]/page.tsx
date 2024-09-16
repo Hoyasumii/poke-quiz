@@ -1,4 +1,4 @@
-import { PokemonCard, StepButton, StepManager } from "@/components";
+import { PokemonCard, StepManager } from "@/components";
 import { loadPokemonData } from "@/server";
 
 export default async function Page({
@@ -8,12 +8,10 @@ export default async function Page({
 }) {
   const pokemonAmount = parseInt(amount);
 
-  if (isNaN(pokemonAmount)) return new Error();
-
   const pokemonData = await loadPokemonData(pokemonAmount);
 
   return (
-    <main className="flex flex-col gap-4 items-center py-10 w-40 md:w-72 h-full">
+    <>
       <StepManager.Root>
         <StepManager.Content>
           {pokemonData.map((pokemon, index) => (
@@ -28,9 +26,11 @@ export default async function Page({
           ))}
         </StepManager.Content>
         <StepManager.End>
-          <StepButton />
+          <h1>Hello</h1>
+          {/* <End />
+            <ReloadButton /> */}
         </StepManager.End>
       </StepManager.Root>
-    </main>
+    </>
   );
 }
