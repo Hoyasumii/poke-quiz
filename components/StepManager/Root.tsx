@@ -23,8 +23,6 @@ export function Root({ children }: Props) {
 
   return (
     <>
-      <p>step: {step}</p>
-      <p>content.props.children.length: {content.props.children.length}</p>
       {step < (content.props.children as ReactElement[]).length &&
         content.props.children[step]}
 
