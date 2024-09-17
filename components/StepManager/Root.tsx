@@ -14,7 +14,7 @@ export function Root({ children }: Props) {
   const content = managedNode.find(
     (nodeChildren) => nodeChildren.props.type === "content"
   );
-  
+
   const end = managedNode.find(
     (nodeChildren) => nodeChildren.props.type === "end"
   );
@@ -26,8 +26,7 @@ export function Root({ children }: Props) {
       {step < (content.props.children as ReactElement[]).length &&
         content.props.children[step]}
 
-      {step > (content.props.children as ReactElement[]).length - 1 &&
-        end}
+      {step > (content.props.children as ReactElement[]).length - 1 && end}
     </>
   );
 }

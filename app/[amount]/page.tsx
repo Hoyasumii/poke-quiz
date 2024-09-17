@@ -1,5 +1,6 @@
 import { PokemonCard, StepManager } from "@/components";
 import { loadPokemonData } from "@/server";
+import { End } from "./End";
 
 export default async function Page({
   params: { amount },
@@ -26,9 +27,7 @@ export default async function Page({
           ))}
         </StepManager.Content>
         <StepManager.End>
-          <h1>Hello</h1>
-          {/* <End />
-            <ReloadButton /> */}
+          <End />
         </StepManager.End>
       </StepManager.Root>
     </>

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { PokemonType } from "@/types";
 import Image from "next/image";
 import { Type } from "./Type";
-import { useStep } from "@/storage";
+import { useProgress, useScore } from "@/storage";
 
 type Props = {
   name: string;
@@ -21,12 +20,13 @@ export function PokemonCard({
   sprite,
   types,
 }: Props) {
-  const { step, setStep } = useStep();
+  const { progress, setProgress } = useProgress();
+  const { score, setScore } = useScore();
 
   return (
-    <div className="flex flex-col gap-2 items-center w-fit bg-white shadow-sm shadow-slate-200 rounded-2xl p-4">
+    <div className="flex flex-col gap-2 items-center w-fit bg-white border border-slate-200 rounded-2xl p-4">
       <Image src={sprite} alt="" width={512} height={512} />
-      <div className="w-full flex justify-center items-start gap-2 pb-2 border-b border-b-slate-100">
+      <div className="w-full flex justify-center items-start gap-2 pb-2 border-b border-b-slate-200">
         <strong className="font-bold text-slate-700 text-xl md:text-2xl capitalize">
           {name}
         </strong>
@@ -36,7 +36,10 @@ export function PokemonCard({
         {types.map((pokemonType, index) => (
           <Type
             onClick={() => {
-              setStep(step + 1);
+              setProgress(progress + 1);
+              if (pokemonType === correctAnswer) {
+                setScore(score + 1);
+              }
             }}
             pokemonType={pokemonType}
             key={`pokemon-type-${index}`}

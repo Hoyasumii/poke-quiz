@@ -1,3 +1,8 @@
+"use client";
+
+import { useScore } from "@/storage";
+
 export function End() {
-  return <h1>Hello World</h1>
+  const { score } = useScore();
+  return <h1 className="bg-blue-300">{score}</h1>;
 }
