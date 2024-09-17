@@ -39,8 +39,6 @@ export default function Layout({
       <main className="flex flex-col gap-4 items-center py-10 w-10/12 md:w-72 h-full">
         {children}
       </main>
-      <p>{step}</p>
-      <p>{progress}</p>
     </>
   );
 }
