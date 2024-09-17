@@ -1,8 +1,11 @@
 import { Pokemon } from "@/types";
-import Request from ".";
 
 export async function getPokemon(id: number): Promise<Pokemon> {
-  const pokemonResponse = (await Request.get(`/pokemon/${id}`)).data;
+  const pokemonResponse = await (
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
+      cache: "no-cache",
+    })
+  ).json();
 
   return {
     name: pokemonResponse?.name,

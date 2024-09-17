@@ -2,7 +2,7 @@
 
 import { Progress } from "@/components";
 import { useProgress, useStep } from "@/storage";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 
 export default function Layout({
   children,
@@ -13,21 +13,16 @@ export default function Layout({
 }) {
   const { step, setStep } = useStep();
   const { progress } = useProgress();
-  const [running, setRunning] = useState<boolean>(false);
 
   const pokemonAmount = parseInt(amount);
 
   useEffect(() => {
-    if (!running) return;
+    if (progress === 0) return;
     setTimeout(async () => {
       setStep(step + 1);
     }, 300);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress]);
-
-  useEffect(() => {
-    setRunning(true);
-  }, []);
 
   if (isNaN(pokemonAmount) || pokemonAmount <= 0) return new Error();
 
@@ -44,6 +39,8 @@ export default function Layout({
       <main className="flex flex-col gap-4 items-center py-10 w-10/12 md:w-72 h-full">
         {children}
       </main>
+      <p>{step}</p>
+      <p>{progress}</p>
     </>
   );
 }
