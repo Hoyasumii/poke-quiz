@@ -3,7 +3,13 @@ import { Content as ContentComponent } from "./Content";
 import { Root } from "./Root";
 
 function Content({ children }: { children: ReactNode }) {
-  return <ContentComponent type="content">{children}</ContentComponent>;
+  return (
+    <ContentComponent
+      type="content"
+    >
+      {children}
+    </ContentComponent>
+  );
 }
 
 function End({ children }: { children: ReactNode }) {
